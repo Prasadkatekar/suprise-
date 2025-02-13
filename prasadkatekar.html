@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Gauri ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffebee;
+            padding: 50px;
+            overflow: hidden;
+            position: relative;
+        }
+        .card {
+            background-color: red;
+            color: white;
+            font-size: 24px;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .hidden { display: none; }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .choice-btn {
+            background-color: #f06292;
+            color: white;
+            font-size: 18px;
+        }
+        .rose, .sunflower, .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: fall 4s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .big-yes {
+            font-size: 100px !important;
+            padding: 50px;
+            width: 100vw;
+            height: 100vh;
+        }
+        .note {
+            font-size: 16px;
+            color: #444;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="step1" class="card" onclick="showStep(2)">
+        <span style="font-size: 40px; font-weight: bold; color: gold;">Hello Gauri! ❤️</span><br>
+        <span style="font-size: 14px;">(Click on me)</span>
+    </div>
+
+    <div id="step2" class="hidden">
+        <h2>How are you?</h2>
+        <button class="choice-btn" onclick="showHowResponse('fine')">Fine</button>
+        <button class="choice-btn" onclick="showHowResponse('amazing')">Amazing</button>
+    </div>
+
+    <div id="howResponse" class="hidden">
+        <h2 id="howText"></h2>
+        <button class="choice-btn" onclick="showStep(3)">Next</button>
+    </div>
+
+    <div id="step3" class="hidden">
+        <h2>What would you love? 🌹🌻</h2>
+        <button class="choice-btn" onclick="fallingFlowers('rose')">Pink Roses</button>
+        <button class="choice-btn" onclick="fallingFlowers('sunflower')">Sunflowers</button>
+    </div>
+
+    <div id="flowerMessage" class="hidden">
+        <h2 id="flowerText"></h2>
+        <button class="choice-btn" onclick="showStep(4)">Next</button>
+    </div>
+
+    <div id="step4" class="hidden">
+        <h2>Now the important part... Are you ready? 😉</h2>
+        <button class="choice-btn" onclick="showStep(5)">Yes</button>
+        <button class="choice-btn" onclick="showStep(5)">Obviously Yes</button>
+    </div>
+
+    <div id="step5" class="hidden">
+        <h1>Will You Be My Valentine? ❤️</h1>
+        <button id="yes" class="choice-btn" onclick="sayYes()">Yes</button>
+        <button id="no" class="choice-btn" onclick="changeNoText()">No</button>
+    </div>
+
+    <div id="flashMessage" class="hidden">
+        <h1>YAY!!! LET'S GO BABES ❤️</h1>
+        <p class="note">NOTE: Any replies please message personally because Prasad only learned this much from YouTube for you... I'm sorry 😅😂</p>
+    </div>
+
+    <script>
+        let noButton = document.getElementById("no");
+        let yesButton = document.getElementById("yes");
+        let noTexts = [
+            "Are you serious? 😳", "You're missing a golden opportunity! 😢", "Think once again! 🤔", "It's the time! ⏳",
+            "I'll cry, please say yes 😭", "I will keep you as my princess 👑", "I will pamper you every day! 💖",
+            "I will bring a surprise gift for you every day 🎁", "Please madam, say yes 🙏"
+        ];
+        let noIndex = 0;
+
+        function showStep(step) {
+            document.getElementById("step" + (step - 1)).classList.add("hidden");
+            document.getElementById("step" + step).classList.remove("hidden");
+        }
+
+        function showHowResponse(response) {
+            document.getElementById("step2").classList.add("hidden");
+            document.getElementById("howResponse").classList.remove("hidden");
+            document.getElementById("howText").textContent = response === "fine" 
+                ? "So I came to make it amazing! 😘" 
+                : "So I came to make it more amazing!! ❤️";
+        }
+
+        function fallingFlowers(type) {
+            document.getElementById("step3").classList.add("hidden");
+            document.getElementById("flowerMessage").classList.remove("hidden");
+
+            let message = type === "rose" ? "For you, Cutie! ❤️" : "To my Sunshine! ☀️";
+            document.getElementById("flowerText").textContent = message;
+
+            let emoji = type === "rose" ? "🌹" : "🌻";
+
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    let flower = document.createElement("div");
+                    flower.classList.add(type);
+                    flower.innerHTML = emoji;
+                    flower.style.left = Math.random() * 100 + "vw";
+                    flower.style.fontSize = Math.random() * 30 + 20 + "px";
+                    flower.style.animationDuration = Math.random() * 3 + 2 + "s";
+                    document.body.appendChild(flower);
+                    setTimeout(() => flower.remove(), 5000);
+                }, i * 100);
+            }
+        }
+
+        function sayYes() {
+            document.getElementById("step5").classList.add("hidden");
+            document.getElementById("flashMessage").classList.remove("hidden");
+
+            yesButton.classList.add("big-yes");
+            yesButton.textContent = "YES ❤️";
+            document.body.style.overflow = "hidden";
+
+            setInterval(() => {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.fontSize = Math.random() * 30 + 20 + "px";
+                heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 200);
+        }
+
+        function changeNoText() {
+            noButton.textContent = noTexts[noIndex];
+            noIndex = (noIndex + 1) % noTexts.length;
+            yesButton.style.fontSize = (parseFloat(window.getComputedStyle(yesButton).fontSize) + 10) + "px";
+        }
+    </script>
+
+</body>
+</html>
+
